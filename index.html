@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation</title>
+    <style>
+        *{
+            background-color: black;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container{
+            padding: 30px;
+            margin: 30px;
+        }
+
+        .top > h1 {
+            color: white;
+            font-size: 3em;
+        }
+
+        .count{
+            color: lightgrey;
+        }
+
+        #counter{
+            color: white;
+        }
+
+        .error{
+            color: darkred;
+        }
+
+        .bottom > button {
+            background-color: white;
+            color: black;
+            padding: 10px 15px;
+            margin: 20px 7px 0px 0px;
+            width: 7rem;
+        }
+
+        #clear {
+            background-color: black;
+            border: 1px solid white;
+            color: white;
+        }
+
+        .separator {
+            background-color: lightgray;
+            height: 2px;
+            width: 170px;
+        }
+
+    </style>
+
+    <script>
+     document.addEventListener("DOMContentLoaded" , function(){
+        const increment = document.getElementById("increment");
+        const decrement = document.getElementById("decrement");
+        const clear = document.getElementById("clear");
+        const counter = document.getElementById("counter");
+        const error = document.querySelector(".error");
+
+        let count = 0 ;
+        clear.style.display = "none";
+        error.style.display = "none";
+
+        increment.addEventListener("click" , function(){
+            count++ ;
+            if (count > 0){
+                error.style.display = "none";
+            }
+            counter.innerHTML = count;
+            updateButtons();
+        });
+
+        decrement.addEventListener("click" , function(){
+            if (count > 0){
+                count-- ;
+                counter.innerHTML = count ;
+                updateButtons();
+            } else {
+                showError();
+            }
+        });
+
+        clear.addEventListener("click" , function(){
+            count = 0 ;
+            counter.innerHTML = count ;
+            updateButtons();
+        });
+
+        function showError(){
+            error.style.display = "block";
+        }
+
+        function updateButtons(){
+            if (count == 0){
+                clear.style.display = "none";
+                error.style.display = "none";
+            } else {
+                clear.style.display = "block";
+            }
+        }
+     });   
+    </script>
+</head>
+<body>
+    <div class = "container">
+        <div class = "top">
+            <h1>Counter using HTML</h1>
+        </div>
+        <div class="middle">
+            <p class="count"> Your current counter is: <span id="counter">0</span></p>
+            <div class="separator"></div>
+            <p class="error">Error: cannot go below 0</p>
+        </div>
+        <div class="bottom">
+            <button id="decrement">Decrement</button>
+            <button id="increment">Increment</button>
+            <button id="clear">Clear</button>
+        </div>
+    </div>
+</body>
+</html>
